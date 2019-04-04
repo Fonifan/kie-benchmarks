@@ -16,8 +16,6 @@
 
 package org.jboss.qa.brms.performance.examples.conferencescheduling.persistence;
 
-import java.io.File;
-import java.math.BigInteger;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -32,7 +30,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.tuple.Pair;
-import org.jboss.qa.brms.performance.examples.common.persistence.generator.StringDataGenerator;
+import org.jboss.qa.brms.performance.examples.conferencescheduling.persistence.generator.StringDataGenerator;
 import org.jboss.qa.brms.performance.examples.conferencescheduling.domain.ConferenceConstraintConfiguration;
 import org.jboss.qa.brms.performance.examples.conferencescheduling.domain.ConferenceSolution;
 import org.jboss.qa.brms.performance.examples.conferencescheduling.domain.Room;
@@ -43,23 +41,23 @@ import org.jboss.qa.brms.performance.examples.conferencescheduling.domain.Timesl
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ConferenceSchedulingGenerator  {
+public class ConferenceSchedulingGenerator {
 
-    protected final Logger logger = LoggerFactory.getLogger(ConferenceSchedulingGenerator.class.getName());
+    protected static final Logger LOGGER = LoggerFactory.getLogger(ConferenceSchedulingGenerator.class.getName());
 
     private final StringDataGenerator conferenceNameGenerator = new StringDataGenerator()
             .addPart(true, 0,
-                    "Javoxx",
-                    "Red Bonnet Summit",
-                    "JayFocus",
-                    "YCon",
-                    "JAQ")
+                     "Javoxx",
+                     "Red Bonnet Summit",
+                     "JayFocus",
+                     "YCon",
+                     "JAQ")
             .addPart(false, 0,
-                    "2021",
-                    "2022",
-                    "2023",
-                    "2024",
-                    "2025");
+                     "2021",
+                     "2022",
+                     "2023",
+                     "2024",
+                     "2025");
 
     private static final String LAB_TALK_TYPE = "Lab";
     private static final String BREAKOUT_TALK_TYPE = "Breakout";
@@ -85,93 +83,93 @@ public class ConferenceSchedulingGenerator  {
     private final StringDataGenerator speakerNameGenerator = StringDataGenerator.buildFullNames();
 
     private final String[] contentTagOptions = {
-        "OpenShift",
-        "WildFly",
-        "Spring",
-        "Drools",
-        "OptaPlanner",
-        "jBPM",
-        "Camel",
-        "XStream",
-        "Docker",
-        "Hibernate",
-        "GWT",
-        "Errai",
-        "Angular",
-        "Weld",
-        "RestEasy",
-        "Android",
-        "Tensorflow",
-        "VertX",
-        "JUnit",
-        "Keycloak"
+            "OpenShift",
+            "WildFly",
+            "Spring",
+            "Drools",
+            "OptaPlanner",
+            "jBPM",
+            "Camel",
+            "XStream",
+            "Docker",
+            "Hibernate",
+            "GWT",
+            "Errai",
+            "Angular",
+            "Weld",
+            "RestEasy",
+            "Android",
+            "Tensorflow",
+            "VertX",
+            "JUnit",
+            "Keycloak"
     };
     private final StringDataGenerator talkTitleGenerator = new StringDataGenerator()
             .addPart(true, 0,
-                    "Hands on",
-                    "Advanced",
-                    "Learn",
-                    "Intro to",
-                    "Discover",
-                    "Mastering",
-                    "Tuning",
-                    "Building",
-                    "Securing",
-                    "Debug",
-                    "Prepare for",
-                    "Understand",
-                    "Applying",
-                    "Grok",
-                    "Troubleshooting",
-                    "Using",
-                    "Deliver",
-                    "Implement",
-                    "Program",
-                    "Hack")
+                     "Hands on",
+                     "Advanced",
+                     "Learn",
+                     "Intro to",
+                     "Discover",
+                     "Mastering",
+                     "Tuning",
+                     "Building",
+                     "Securing",
+                     "Debug",
+                     "Prepare for",
+                     "Understand",
+                     "Applying",
+                     "Grok",
+                     "Troubleshooting",
+                     "Using",
+                     "Deliver",
+                     "Implement",
+                     "Program",
+                     "Hack")
             .addPart(true, 0,
-                    "real-time",
-                    "containerized",
-                    "virtualized",
-                    "serverless",
-                    "AI-driven",
-                    "machine learning",
-                    "IOT-driven",
-                    "deep learning",
-                    "scalable",
-                    "enterprise",
-                    "streaming",
-                    "mobile",
-                    "modern",
-                    "distributed",
-                    "reliable",
-                    "secure",
-                    "stable",
-                    "platform-independent",
-                    "flexible",
-                    "modularized")
+                     "real-time",
+                     "containerized",
+                     "virtualized",
+                     "serverless",
+                     "AI-driven",
+                     "machine learning",
+                     "IOT-driven",
+                     "deep learning",
+                     "scalable",
+                     "enterprise",
+                     "streaming",
+                     "mobile",
+                     "modern",
+                     "distributed",
+                     "reliable",
+                     "secure",
+                     "stable",
+                     "platform-independent",
+                     "flexible",
+                     "modularized")
             .addPart(true, 1,
-                    contentTagOptions)
+                     contentTagOptions)
             .addPart(false, 3,
-                    "in a nutshell",
-                    "in practice",
-                    "for dummies",
-                    "in action",
-                    "recipes",
-                    "on the web",
-                    "for decision makers",
-                    "on the whiteboard",
-                    "out of the box",
-                    "for programmers",
-                    "for managers",
-                    "for QA engineers",
-                    "in Java",
-                    "in Scala",
-                    "in Kotlin",
-                    "in Lisp",
-                    "in C++",
-                    "in Assembly",
-                    "with style",
-                    "like a pro");
+                     "in a nutshell",
+                     "in practice",
+                     "for dummies",
+                     "in action",
+                     "recipes",
+                     "on the web",
+                     "for decision makers",
+                     "on the whiteboard",
+                     "out of the box",
+                     "for programmers",
+                     "for managers",
+                     "for QA engineers",
+                     "in Java",
+                     "in Scala",
+                     "in Kotlin",
+                     "in Lisp",
+                     "in C++",
+                     "in Assembly",
+                     "with style",
+                     "like a pro");
 
     private final List<String> themeTagOptions = Arrays.asList(
             "Artificial Intelligence",
@@ -183,7 +181,7 @@ public class ConferenceSchedulingGenerator  {
             "IoT",
             "Modern Web",
             "Security"
-            );
+    );
 
     private final List<String> sectorTagOptions = Arrays.asList(
             "Education",
@@ -192,28 +190,37 @@ public class ConferenceSchedulingGenerator  {
             "Healthcare",
             "Telecommunications",
             "Transportation"
-            );
+    );
     private final List<String> audienceTypeOptions = Arrays.asList(
             "Programmers",
             "Business analysts",
             "Managers"
-            );
+    );
 
-
+    private static final String TIMESLOT_AFTER_LUNCH_TAG = "After lunch";
+    private static final List<String> mutuallyExclusiveTagList = Arrays.asList("Platinum Sponsor");
 
     private TalkType breakoutTalkType;
     private TalkType labTalkType;
     protected int labTalkCount;
     protected Random random;
 
-
     public ConferenceSolution createConferenceSolution(int timeslotListSize, int roomListSize,
                                                        int speakerListSize, int talkListSize) {
+
+        int dayListSize = timeslotListSize / timeslotOptions.size();
+        int labRoomCount = roomListSize / 5;
+        int labTimeslotCount = (int) timeslotOptions.stream()
+                .filter(pair -> Duration.between(pair.getLeft(), pair.getRight()).toMinutes() >= 120).count();
+
+        labTalkCount = (dayListSize * labTimeslotCount) * labRoomCount;
+
         random = new Random(37);
         ConferenceSolution solution = new ConferenceSolution();
         solution.setId(0L);
         solution.setConferenceName(conferenceNameGenerator.generateNextValue());
         ConferenceConstraintConfiguration constraintConfiguration = new ConferenceConstraintConfiguration();
+        constraintConfiguration.setMinimumConsecutiveTalksPauseInMinutes(15);
         constraintConfiguration.setId(0L);
         solution.setConstraintConfiguration(constraintConfiguration);
 
@@ -223,12 +230,10 @@ public class ConferenceSchedulingGenerator  {
         createSpeakerList(solution, speakerListSize);
         createTalkList(solution, talkListSize);
 
-        BigInteger possibleSolutionSize = BigInteger.valueOf((long) timeslotListSize * roomListSize)
-                .pow(talkListSize);
-        logger.info("Conference  has {} talks, {} timeslots and {} rooms with a search space of .",
-                talkListSize,
-                timeslotListSize,
-                roomListSize);
+        LOGGER.info("Generated conference has {} talks, {} timeslots and {} rooms.",
+                    talkListSize,
+                    timeslotListSize,
+                    roomListSize);
         return solution;
     }
 
@@ -266,9 +271,12 @@ public class ConferenceSchedulingGenerator  {
             timeslot.setTalkTypeSet(Collections.singleton(talkType));
             timeslotOptionsIndex++;
             Set<String> tagSet = new LinkedHashSet<>(2);
+            if (timeslot.getStartDateTime().getHour() >= 13 && timeslot.getStartDateTime().getHour() < 14) {
+                tagSet.add(TIMESLOT_AFTER_LUNCH_TAG);
+            }
             timeslot.setTagSet(tagSet);
-            logger.trace("Created timeslot ({}) with tags ({}).",
-                    timeslot, tagSet);
+            LOGGER.trace("Created timeslot ({}) with tags ({}).",
+                         timeslot, tagSet);
             timeslotList.add(timeslot);
         }
         solution.setTimeslotList(timeslotList);
@@ -293,13 +301,17 @@ public class ConferenceSchedulingGenerator  {
             room.setUnavailableTimeslotSet(new LinkedHashSet<>());
             Set<String> tagSet = new LinkedHashSet<>(roomTagProbabilityList.size());
             for (Pair<String, Double> roomTagProbability : roomTagProbabilityList) {
-                if (i == 0 || i == 4 || random.nextDouble() < roomTagProbability.getValue()) {
+                if ((i == 0 || i == 4 || random.nextDouble() < roomTagProbability.getValue())
+                        && roomTagProbability.getKey().equals("Recorded")) {
                     tagSet.add(roomTagProbability.getKey());
                 }
             }
+            if (room.getCapacity() >= 500) {
+                tagSet.add("Large");
+            }
             room.setTagSet(tagSet);
-            logger.trace("Created room with name ({}) and tags ({}).",
-                    room.getName(), tagSet);
+            LOGGER.trace("Created room with name ({}) and tags ({}).",
+                         room.getName(), tagSet);
             roomList.add(room);
         }
         solution.setRoomList(roomList);
@@ -313,19 +325,23 @@ public class ConferenceSchedulingGenerator  {
             speaker.setId((long) i);
             speaker.setName(speakerNameGenerator.generateNextValue());
             Set<Timeslot> unavailableTimeslotSet;
+            Set<String> preferredTimeslotTagSet = new LinkedHashSet<>();
+            Set<String> undesiredTimeslotTagSet = new LinkedHashSet<>();
             List<Timeslot> timeslotList = solution.getTimeslotList();
             if (random.nextDouble() < 0.10) {
-                if (random.nextDouble() < 0.25) {
+                double segmentRandom = random.nextDouble();
+                if (segmentRandom < 0.10) {
                     // No mornings
                     unavailableTimeslotSet = timeslotList.stream()
                             .filter(timeslot -> timeslot.getStartDateTime().toLocalTime().isBefore(LocalTime.of(12, 0)))
                             .collect(Collectors.toCollection(LinkedHashSet::new));
-                } else if (random.nextDouble() < 0.25) {
+                    preferredTimeslotTagSet.add(TIMESLOT_AFTER_LUNCH_TAG);
+                } else if (segmentRandom < 0.20) {
                     // No afternoons
                     unavailableTimeslotSet = timeslotList.stream()
                             .filter(timeslot -> !timeslot.getStartDateTime().toLocalTime().isBefore(LocalTime.of(12, 0)))
                             .collect(Collectors.toCollection(LinkedHashSet::new));
-                } else if (random.nextDouble() < 0.25) {
+                } else if (segmentRandom < 0.30) {
                     // Only 1 day available
                     LocalDate availableDate = timeslotList.get(random.nextInt(timeslotList.size())).getDate();
                     unavailableTimeslotSet = timeslotList.stream()
@@ -333,35 +349,29 @@ public class ConferenceSchedulingGenerator  {
                             .collect(Collectors.toCollection(LinkedHashSet::new));
                 } else {
                     unavailableTimeslotSet = timeslotList.stream()
-                            .filter(timeslot -> random.nextDouble() < 0.10)
+                            .filter(timeslot -> random.nextDouble() < 0.05)
                             .collect(Collectors.toCollection(LinkedHashSet::new));
+                    undesiredTimeslotTagSet.add(TIMESLOT_AFTER_LUNCH_TAG);
                 }
             } else {
                 unavailableTimeslotSet = new LinkedHashSet<>(timeslotList.size());
             }
             speaker.setUnavailableTimeslotSet(unavailableTimeslotSet);
-            speaker.setRequiredTimeslotTagSet(new LinkedHashSet<>());
-            speaker.setPreferredTimeslotTagSet(new LinkedHashSet<>());
+            speaker.setRequiredTimeslotTagSet(new LinkedHashSet<>()); // TODO: choose random required/prohibited tags that don't result in an infeasible solution
+            speaker.setPreferredTimeslotTagSet(preferredTimeslotTagSet);
             speaker.setProhibitedTimeslotTagSet(new LinkedHashSet<>());
-            speaker.setUndesiredTimeslotTagSet(new LinkedHashSet<>());
+            speaker.setUndesiredTimeslotTagSet(undesiredTimeslotTagSet);
             Set<String> requiredRoomTagSet = new LinkedHashSet<>();
-            for (Pair<String, Double> roomTagProbability : roomTagProbabilityList) {
-                if (random.nextDouble() < roomTagProbability.getValue() / 20.0) {
-                    requiredRoomTagSet.add(roomTagProbability.getKey());
-                }
-            }
-            speaker.setRequiredRoomTagSet(requiredRoomTagSet);
             Set<String> preferredRoomTagSet = new LinkedHashSet<>();
-            for (Pair<String, Double> roomTagProbability : roomTagProbabilityList) {
-                if (random.nextDouble() < roomTagProbability.getValue() / 10.0) {
-                    preferredRoomTagSet.add(roomTagProbability.getKey());
-                }
-            }
+            Set<String> prohibitedRoomTagSet = new LinkedHashSet<>();
+            Set<String> undesiredRoomTagSet = new LinkedHashSet<>();
+            initializeRoomTagSets(requiredRoomTagSet, preferredRoomTagSet, prohibitedRoomTagSet, undesiredRoomTagSet);
+            speaker.setRequiredRoomTagSet(requiredRoomTagSet);
             speaker.setPreferredRoomTagSet(preferredRoomTagSet);
-            speaker.setProhibitedRoomTagSet(new LinkedHashSet<>());
-            speaker.setUndesiredRoomTagSet(new LinkedHashSet<>());
-            logger.trace("Created speaker with name ({}).",
-                    speaker.getName());
+            speaker.setProhibitedRoomTagSet(prohibitedRoomTagSet);
+            speaker.setUndesiredRoomTagSet(undesiredRoomTagSet);
+            LOGGER.trace("Created speaker with name ({}).",
+                         speaker.getName());
             speakerList.add(speaker);
         }
         solution.setSpeakerList(speakerList);
@@ -417,24 +427,74 @@ public class ConferenceSchedulingGenerator  {
             talk.setPreferredTimeslotTagSet(new LinkedHashSet<>());
             talk.setProhibitedTimeslotTagSet(new LinkedHashSet<>());
             talk.setUndesiredTimeslotTagSet(new LinkedHashSet<>());
-            talk.setRequiredRoomTagSet(new LinkedHashSet<>());
-            talk.setPreferredRoomTagSet(new LinkedHashSet<>());
-            talk.setProhibitedRoomTagSet(new LinkedHashSet<>());
-            talk.setUndesiredRoomTagSet(new LinkedHashSet<>());
-            talk.setMutuallyExclusiveTalksTagSet(new LinkedHashSet<>());
-            talk.setPrerequisiteTalkSet(new LinkedHashSet<>());
+
+            Set<String> requiredRoomTagSet = new LinkedHashSet<>();
+            Set<String> preferredRoomTagSet = new LinkedHashSet<>();
+            Set<String> prohibitedRoomTagSet = new LinkedHashSet<>();
+            Set<String> undesiredRoomTagSet = new LinkedHashSet<>();
+            initializeRoomTagSets(requiredRoomTagSet, preferredRoomTagSet, prohibitedRoomTagSet, undesiredRoomTagSet);
+            talk.setRequiredRoomTagSet(requiredRoomTagSet);
+            talk.setPreferredRoomTagSet(preferredRoomTagSet);
+            talk.setProhibitedRoomTagSet(prohibitedRoomTagSet);
+            talk.setUndesiredRoomTagSet(undesiredRoomTagSet);
+
+            Set<String> mutuallyExclusiveTagSet = new LinkedHashSet<>();
+            if (random.nextDouble() < 0.025) {
+                mutuallyExclusiveTagSet.add(mutuallyExclusiveTagList.get(random.nextInt(mutuallyExclusiveTagList.size())));
+            }
+            talk.setMutuallyExclusiveTalksTagSet(mutuallyExclusiveTagSet);
+
+            Set<Talk> prerequisiteTalkCodeSet = new LinkedHashSet<>();
+            if (random.nextDouble() < 0.025) {
+                prerequisiteTalkCodeSet.add(talkList.get(random.nextInt(talkList.size())));
+            }
+            talk.setPrerequisiteTalkSet(prerequisiteTalkCodeSet);
+
             talk.setFavoriteCount(random.nextInt(1000));
-            talk.setCrowdControlRisk(random.nextInt(5));
-            logger.trace("Created talk with code ({}), title ({}) and speakers ({}).",
-                    talk.getCode(), talk.getTitle(), speakerList);
+            if (random.nextDouble() < 0.02) {
+                talk.setCrowdControlRisk(1);
+                // Need an even number of talks with crowd control > 1 for a feasible solution
+                Talk pairedTalk = talkList.get(random.nextInt(talkList.size()));
+                while (pairedTalk.getCrowdControlRisk() != 0 || !pairedTalk.getTalkType().equals(talk.getTalkType())) {
+                    pairedTalk = talkList.get(random.nextInt(talkList.size()));
+                }
+                pairedTalk.setCrowdControlRisk(1);
+            }
+            talk.setCrowdControlRisk(0); // Disabled for now: the unsolved schedules must have a feasible solution
+            LOGGER.trace("Created talk with code ({}), title ({}) and speakers ({}).",
+                         talk.getCode(), talk.getTitle(), speakerList);
             talkList.add(talk);
         }
+
         Talk pinnedTalk = talkList.get(labTalkCount + random.nextInt(talkListSize - labTalkCount));
         pinnedTalk.setPinnedByUser(true);
         pinnedTalk.setTimeslot(solution.getTimeslotList().stream()
-                .filter(timeslot -> timeslot.getTalkTypeSet().contains(breakoutTalkType)).findFirst().get());
+                                       .filter(timeslot -> timeslot.getTalkTypeSet().contains(breakoutTalkType)).findFirst().get());
         pinnedTalk.setRoom(solution.getRoomList().get(0));
+
+        Talk publishedTalk = talkList.get(random.nextInt(labTalkCount));
+        publishedTalk.setTimeslot(solution.getTimeslotList().stream()
+                                          .filter(timeslot -> timeslot.getTalkTypeSet().contains(labTalkType)).findFirst().get());
+        publishedTalk.setRoom(solution.getRoomList().stream()
+                                      .filter(room -> room.getTalkTypeSet().contains(labTalkType)).findFirst().get()); // In this data set rooms has only one talkType
+        publishedTalk.setPublishedTimeslot(publishedTalk.getTimeslot());
+        publishedTalk.setPublishedRoom(publishedTalk.getRoom());
+
         solution.setTalkList(talkList);
     }
 
+    private void initializeRoomTagSets(Set<String> requiredRoomTagSet, Set<String> preferredRoomTagSet, Set<String> prohibitedRoomTagSet, Set<String> undesiredRoomTagSet) {
+        for (Pair<String, Double> roomTagProbability : roomTagProbabilityList) {
+            Double segmentRandom = random.nextDouble();
+            if (segmentRandom < roomTagProbability.getValue() / 25.0) {
+                requiredRoomTagSet.add(roomTagProbability.getKey());
+            } else if (segmentRandom < roomTagProbability.getValue() / 20.0) {
+                prohibitedRoomTagSet.add(roomTagProbability.getKey());
+            } else if (segmentRandom < roomTagProbability.getValue() / 15.0) {
+                preferredRoomTagSet.add(roomTagProbability.getKey());
+            } else if (segmentRandom < roomTagProbability.getValue() / 10.0) {
+                undesiredRoomTagSet.add(roomTagProbability.getKey());
+            }
+        }
+    }
 }
