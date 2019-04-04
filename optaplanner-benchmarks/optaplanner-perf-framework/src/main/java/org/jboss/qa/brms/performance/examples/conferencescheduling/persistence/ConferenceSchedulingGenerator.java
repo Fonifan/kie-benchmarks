@@ -30,8 +30,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.tuple.Pair;
-
-import org.jboss.qa.brms.performance.examples.common.persistence.AbstractSolutionImporter;
 import org.jboss.qa.brms.performance.examples.common.persistence.generator.StringDataGenerator;
 import org.jboss.qa.brms.performance.examples.conferencescheduling.domain.ConferenceParametrization;
 import org.jboss.qa.brms.performance.examples.conferencescheduling.domain.ConferenceSolution;
@@ -44,7 +42,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ConferenceSchedulingGenerator {
-    protected final Logger logger = LoggerFactory.getLogger(ConferenceSchedulingGenerator.class.getName());
+
+    protected final Logger LOGGER = LoggerFactory.getLogger(ConferenceSchedulingGenerator.class.getName());
 
     private final StringDataGenerator conferenceNameGenerator = new StringDataGenerator()
             .addPart(true, 0,
@@ -68,12 +67,12 @@ public class ConferenceSchedulingGenerator {
     private final List<Pair<LocalTime, LocalTime>> timeslotOptions = Arrays.asList(
 //        Pair.of(LocalTime.of(8, 30), LocalTime.of(9, 30)), // General session
             Pair.of(LocalTime.of(10, 15), LocalTime.of(12, 15)), // Lab
-        Pair.of(LocalTime.of(10, 15), LocalTime.of(11, 0)),
-        Pair.of(LocalTime.of(11, 30), LocalTime.of(12, 15)),
+            Pair.of(LocalTime.of(10, 15), LocalTime.of(11, 0)),
+            Pair.of(LocalTime.of(11, 30), LocalTime.of(12, 15)),
             Pair.of(LocalTime.of(13, 0), LocalTime.of(15, 0)), // Lab
 //        Pair.of(LocalTime.of(13, 45), LocalTime.of(15, 0)), // General session
-        Pair.of(LocalTime.of(15, 30), LocalTime.of(16, 15)),
-        Pair.of(LocalTime.of(16, 30), LocalTime.of(17, 15))
+            Pair.of(LocalTime.of(15, 30), LocalTime.of(16, 15)),
+            Pair.of(LocalTime.of(16, 30), LocalTime.of(17, 15))
     );
 
     private final List<Pair<String, Double>> roomTagProbabilityList = Arrays.asList(
@@ -198,18 +197,13 @@ public class ConferenceSchedulingGenerator {
             "Managers"
             );
 
-
     private TalkType breakoutTalkType;
     private TalkType labTalkType;
     protected int labTalkCount;
     protected Random random;
 
-    public ConferenceSchedulingGenerator() {
-
-    }
-
-    public ConferenceSolution createConferenceSolution( int timeslotListSize, int roomListSize,
-            int speakerListSize, int talkListSize) {
+    public ConferenceSolution createConferenceSolution(int timeslotListSize, int roomListSize,
+                                                       int speakerListSize, int talkListSize) {
         random = new Random(37);
         ConferenceSolution solution = new ConferenceSolution();
         solution.setId(0L);
@@ -226,10 +220,10 @@ public class ConferenceSchedulingGenerator {
 
         BigInteger possibleSolutionSize = BigInteger.valueOf((long) timeslotListSize * roomListSize)
                 .pow(talkListSize);
-        logger.info("Conference has {} talks, {} timeslots and {} rooms .",
-                talkListSize,
-                timeslotListSize,
-                roomListSize);
+        LOGGER.info("Conference {} has {} talks, {} timeslots and {} rooms with a search space of {}.",
+                    talkListSize,
+                    timeslotListSize,
+                    roomListSize);
         return solution;
     }
 
@@ -268,8 +262,8 @@ public class ConferenceSchedulingGenerator {
             timeslotOptionsIndex++;
             Set<String> tagSet = new LinkedHashSet<>(2);
             timeslot.setTagSet(tagSet);
-            logger.trace("Created timeslot ({}) with tags ({}).",
-                    timeslot, tagSet);
+            LOGGER.trace("Created timeslot ({}) with tags ({}).",
+                         timeslot, tagSet);
             timeslotList.add(timeslot);
         }
         solution.setTimeslotList(timeslotList);
@@ -298,8 +292,8 @@ public class ConferenceSchedulingGenerator {
                 }
             }
             room.setTagSet(tagSet);
-            logger.trace("Created room with name ({}) and tags ({}).",
-                    room.getName(), tagSet);
+            LOGGER.trace("Created room with name ({}) and tags ({}).",
+                         room.getName(), tagSet);
             roomList.add(room);
         }
         solution.setRoomList(roomList);
@@ -318,12 +312,12 @@ public class ConferenceSchedulingGenerator {
                 if (random.nextDouble() < 0.25) {
                     // No mornings
                     unavailableTimeslotSet = timeslotList.stream()
-                            .filter(timeslot -> timeslot.getStartDateTime().toLocalTime().isBefore(LocalTime.of(12,0)))
+                            .filter(timeslot -> timeslot.getStartDateTime().toLocalTime().isBefore(LocalTime.of(12, 0)))
                             .collect(Collectors.toCollection(LinkedHashSet::new));
                 } else if (random.nextDouble() < 0.25) {
                     // No afternoons
                     unavailableTimeslotSet = timeslotList.stream()
-                            .filter(timeslot -> !timeslot.getStartDateTime().toLocalTime().isBefore(LocalTime.of(12,0)))
+                            .filter(timeslot -> !timeslot.getStartDateTime().toLocalTime().isBefore(LocalTime.of(12, 0)))
                             .collect(Collectors.toCollection(LinkedHashSet::new));
                 } else if (random.nextDouble() < 0.25) {
                     // Only 1 day available
@@ -360,8 +354,8 @@ public class ConferenceSchedulingGenerator {
             speaker.setPreferredRoomTagSet(preferredRoomTagSet);
             speaker.setProhibitedRoomTagSet(new LinkedHashSet<>());
             speaker.setUndesiredRoomTagSet(new LinkedHashSet<>());
-            logger.trace("Created speaker with name ({}).",
-                    speaker.getName());
+            LOGGER.trace("Created speaker with name ({}).",
+                         speaker.getName());
             speakerList.add(speaker);
         }
         solution.setSpeakerList(speakerList);
@@ -423,12 +417,11 @@ public class ConferenceSchedulingGenerator {
             talk.setUndesiredRoomTagSet(new LinkedHashSet<>());
             talk.setMutuallyExclusiveTalksTagSet(new LinkedHashSet<>());
             talk.setPrerequisiteTalkSet(new LinkedHashSet<>());
-            logger.trace("Created talk with code ({}), title ({}) and speakers ({}).",
-                    talk.getCode(), talk.getTitle(), speakerList);
+            LOGGER.trace("Created talk with code ({}), title ({}) and speakers ({}).",
+                         talk.getCode(), talk.getTitle(), speakerList);
             talkList.add(talk);
         }
         Talk pinnedTalk = talkList.get(labTalkCount + random.nextInt(talkListSize - labTalkCount));
-        pinnedTalk.setPinnedByUser(true);
         pinnedTalk.setTimeslot(solution.getTimeslotList().stream()
                 .filter(timeslot -> timeslot.getTalkTypeSet().contains(breakoutTalkType)).findFirst().get());
         pinnedTalk.setRoom(solution.getRoomList().get(0));

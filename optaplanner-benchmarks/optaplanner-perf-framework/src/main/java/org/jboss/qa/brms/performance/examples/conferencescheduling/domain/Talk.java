@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.optaplanner.core.api.domain.entity.PlanningEntity;
-import org.optaplanner.core.api.domain.entity.PlanningPin;
+import org.optaplanner.core.api.domain.solution.PlanningEntityCollectionProperty;
 import org.optaplanner.core.api.domain.valuerange.ValueRangeProvider;
 import org.optaplanner.core.api.domain.variable.PlanningVariable;
 import org.jboss.qa.brms.performance.examples.common.domain.AbstractPersistable;
@@ -48,9 +48,6 @@ public class Talk extends AbstractPersistable {
     private Set<String> undesiredRoomTagSet;
     private Set<String> mutuallyExclusiveTalksTagSet;
     private Set<Talk> prerequisiteTalkSet;
-
-    @PlanningPin
-    private boolean pinnedByUser = false;
 
     @PlanningVariable(valueRangeProviderRefs = "timeslotRange")
     private Timeslot timeslot;
@@ -395,13 +392,6 @@ public class Talk extends AbstractPersistable {
         this.undesiredRoomTagSet = undesiredRoomTagSet;
     }
 
-    public boolean isPinnedByUser() {
-        return pinnedByUser;
-    }
-
-    public void setPinnedByUser(boolean pinnedByUser) {
-        this.pinnedByUser = pinnedByUser;
-    }
 
     public Timeslot getTimeslot() {
         return timeslot;
