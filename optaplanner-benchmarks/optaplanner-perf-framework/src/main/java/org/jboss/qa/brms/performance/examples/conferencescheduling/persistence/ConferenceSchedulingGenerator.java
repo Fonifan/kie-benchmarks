@@ -30,7 +30,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.tuple.Pair;
-import org.jboss.qa.brms.performance.examples.conferencescheduling.persistence.generator.StringDataGenerator;
+import org.jboss.qa.brms.performance.examples.common.persistence.generator.StringDataGenerator;
 import org.jboss.qa.brms.performance.examples.conferencescheduling.domain.ConferenceConstraintConfiguration;
 import org.jboss.qa.brms.performance.examples.conferencescheduling.domain.ConferenceSolution;
 import org.jboss.qa.brms.performance.examples.conferencescheduling.domain.Room;

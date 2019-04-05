@@ -82,7 +82,7 @@ public class ConferenceScheduling extends AbstractExample<ConferenceSolution> {
         }
     }
 
-    public ConferenceSolution loadSolvingProblem(ConferenceScheduling.DataSet dataset) {
+    public ConferenceSolution loadSolvingProblem(DataSet dataset) {
         return new ConferenceSchedulingGenerator().createConferenceSolution(dataset.timeslotListSize,
                                                                             dataset.roomListSize,
                                                                             dataset.speakerListSize,
